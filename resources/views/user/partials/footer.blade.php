@@ -23,6 +23,7 @@
 <script src="template/assets/js/slick.js"></script>
 <script src="template/assets/js/isotope.js"></script>
 <script src="template/assets/js/accordions.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
 <script language = "text/Javascript">

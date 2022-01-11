@@ -19,8 +19,10 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{route('admin.product.update', ['id', $product->id])}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('admin.product.update', $product->id)}}" method="post" enctype="multipart/form-data">
+                            @method('PUT')
                             @csrf
+
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -47,49 +49,31 @@
                                     <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity" min="0" value="{{$product->quantity}}" required autofocus autocomplete="quantity">
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <!-- Select multiple-->
-                                    <div class="form-group">
-                                        <label>Old Category</label>
-                                        <select multiple class="form-control" name="category_id[]" multiple="multiple">
-                                            @foreach($product->category as $prodcat)
-                                                <option value="{{$prodcat->name}}" selected >{{$prodcat->name}}</option>
-
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
 
                                 <div class="col-sm-6">
                                     <!-- Select multiple-->
                                     <div class="form-group">
-                                        <label>Select Category (Multiple)</label>
+                                        <label>Select Category (Multiple) </label>
                                         <select multiple class="form-control" name="category_id[]" multiple="multiple">
+
 
                                             @foreach($categories as $category)
+                                                @if(in_array($category->id, $product->category->pluck('id')->toArray()))
 
-                                                <option value="{{$category->name }}"  {{$category->name == $prodcat->name ? 'selected' : ''}} >{{$category->name}}</option>
+                                                <option value="{{$category->name }} "selected >{{$category->name}}</option>
 
-                                                @endforeach
+                                                @else
+                                                    <option value="{{$category->name }}">{{$category->name}}</option>
+                                                @endif
+
+                                                    @endforeach
 
 
                                         </select>
                                     </div>
                                 </div>
 
-                                @foreach($product->category as $prodcat)
-                                <input type="checkbox" name="{{$prodcat->name}}">
-                                <label for="checkbox">{{$prodcat->name}}</label><br>
 
-                                @endforeach
-
-                                @foreach($categories as $category)
-                                    @if($category->name != $prodcat->name)
-                                    <input type="checkbox" name="{{$category->name}}">
-                                    <label for="checkbox">{{$category->name}}</label><br>
-                                    @endif
-
-                                @endforeach
 
 
 
@@ -100,6 +84,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
+                                <input name="_method" type="hidden" value="PUT">
                                 <input type="submit" value="Submit" class="btn btn-outline-success">
                             </div>
                         </form>

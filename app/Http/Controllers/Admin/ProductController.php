@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductRequest;
+use App\Http\Requests\Admin\updateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -61,6 +62,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $categories = Category::all();
+       // dd($categories);
         return view('admin.product.edit', compact('product', 'categories'));
     }
 
@@ -69,9 +71,39 @@ class ProductController extends Controller
         return view('admin.product.show', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(updateProductRequest $request, $id)
     {
-        return redirect()->route('admin.product.view');
+        $product = Product::findOrFail($id);
+        $categories = $request->category_id;
+
+        if($request->has('image')){
+            $filename = time() . '_' .  $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('uploads', $filename, 'public');
+        }
+
+
+        $product->update([
+            'name' => $request->name,
+            'image' => $filename ??$product->image,
+            'quantity' => $request->quantity,
+            'description' => $request->description,
+            'old_price' => $request->old_price,
+            'new_price' => $request->new_price,
+
+        ]);
+
+        $newTags = [];
+
+        foreach($categories as $categoryName){
+            $category = Category::firstOrCreate(['name' => $categoryName]);
+            array_push($newTags, $category->id);
+
+        }
+
+        $product->category()->sync($newTags);
+
+
+        return redirect()->route('admin.product.index');
     }
 
     public function destroy($id){

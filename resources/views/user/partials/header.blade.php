@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" href="admin/plugins/fontawesome-free/css/all.min.css">
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <link rel = "icon" href ="/icon/icon.ico" type = "image/x-icon">
+    <!--<script src="/js/jquery-3.6.0.js"></script>-->
 
     <title>Essential Stores</title>
 

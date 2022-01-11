@@ -27,7 +27,7 @@ Route::get('/', [HomeController::class, 'redirect']);
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('user.about');
 Route::get('contact', [HomeController::class, 'contact'])->name('user.contact');
-
+Route::get('search', [HomeController::class, 'search'])->name('user.search');
 
 //Review
 Route::get('/review/{id}/review', [\App\Http\Controllers\ReviewController::class, 'index'])
