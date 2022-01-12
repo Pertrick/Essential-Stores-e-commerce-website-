@@ -26,13 +26,15 @@
     </div>
     <!-- Banner Ends Here -->
 
+
+
     <div class="latest-products">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
               <h2>Latest Products</h2>
-              <a href="products.blade.php">view all products <i class="fa fa-angle-right"></i></a>
+              <a href="{{route('user.showAllProducts')}}">view all products <i class="fa fa-angle-right"></i></a>
 
                 <!--search bar -->
                 <form action="{{route('user.search')}}" method="get" class="p-3 float-right form-inline">
@@ -64,10 +66,17 @@
 
                   <span><a href="{{route('user.review.index', $product->id)}}">Reviews {{count($product->review)}}</a></span>
 
-                  <a href="" class="btn btn-outline-danger text-left">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                      </svg></a>
+                  <form action="{{route('user.addToCart', $product->id)}}" method="get">
+                      @csrf
+                      <p class="m-0">QUANTITY</p>
+                      <input type="number" name="qty" min="1" style="width:60px;  border:1px solid grey; border-radius:5px;" value="1" >
+                      <button type="submit" class="btn btn-outline-danger text-left">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                          </svg>
+                      </button>
+                  </form>
+
 
               </div>
             </div>

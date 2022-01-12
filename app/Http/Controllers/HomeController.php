@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Model\User;
-use App\Model\Role;
+use App\Models\User;
+use App\Models\Role;
 
 
 class HomeController extends Controller
@@ -66,6 +66,13 @@ class HomeController extends Controller
         }
 
 
+    }
+
+    public function showAllProducts()
+    {
+        $products = Product::with('category')->latest()->paginate(9);
+        $sn =1 ;
+        return view('user.products', compact('products', 'sn'));
     }
 
 

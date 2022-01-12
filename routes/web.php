@@ -29,6 +29,17 @@ Route::get('about', [HomeController::class, 'about'])->name('user.about');
 Route::get('contact', [HomeController::class, 'contact'])->name('user.contact');
 Route::get('search', [HomeController::class, 'search'])->name('user.search');
 
+Route::get('all-products', [HomeController::class, 'showAllProducts'])->name('user.showAllProducts');
+
+Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('user.cart');
+Route::get('/add-to-cart/{id}', [\App\Http\Controllers\CartController::class, 'addToCart'])
+    ->name('user.addToCart');
+Route::patch('update-cart', [\App\Http\Controllers\CartController::class, 'updateCart'])
+    ->name('user.updateCart');
+Route::delete('remove-from--cart', [\App\Http\Controllers\CartController::class, 'removeFromCart'])
+    ->name('user.removeFromCart');
+
+
 //Review
 Route::get('/review/{id}/review', [\App\Http\Controllers\ReviewController::class, 'index'])
     ->name('user.review.index');
