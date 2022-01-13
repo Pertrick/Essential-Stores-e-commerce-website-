@@ -1,4 +1,41 @@
 
+<script type="text/javascript">
+
+
+    $(document).ready(function (){
+
+    $('.detail-btn').click(function (){
+        const id = $(this).attr('data-id');
+        console.log(id);
+        $.ajax({
+            url: 'product-modal/'+id,
+            type: 'GET',
+            data: {
+                "id" : id,
+            },
+            success:function (data){
+                console.log(data);
+                $('.detail').click(function (){
+                    $.ajax({
+                        type: 'GET',
+                        url : 'add-to-cart/'+data.id,
+
+                    });
+                });
+                $('#product-id').append(data.id);
+                $('#product-name').html(data.name);
+                $('#product-desc').html(data.description);
+                $('#product-old_price').html('$'+ data.old_price);
+                $('#product-new_price').html('$'+data.new_price);
+                $('#product-image').html('<img src="storage/uploads/'+data.image+ '" width=250 height=250 >');
+
+            }
+        });
+    });
+
+    });
+</script>
+
 <footer>
     <div class="container">
         <div class="row">

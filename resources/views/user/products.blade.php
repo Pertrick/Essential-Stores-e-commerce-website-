@@ -13,11 +13,20 @@
       </div>
     </div>
 
+<!--search bar -->
 
     <div class="products">
       <div class="container">
         <div class="row">
+
           <div class="col-md-12">
+              <form action="{{route('user.searchAllProducts')}}" method="get" class="mt-4 float-right form-inline">
+                  @csrf
+                  <div class="float-right p-3 ">
+                      <input type="search" placeholder="search..." id="search" name="search" class="border-top-0 border-left-0 border-right-0 text-xs focus:outline-none p-2 " required>
+                      <button class=" btn btn-outline-danger border-0 focus:outline-none"><i class="fas fa-search"></i></button>
+                  </div>
+              </form>
             <div class="filters">
               <ul>
                   <li class="active" data-filter="*">All Products</li>
@@ -37,9 +46,14 @@
                         @foreach($products as $product)
                     <div class="col-lg-4 col-md-4 all des">
                       <div class="product-item">
-                        <a href="#"><img src="storage/uploads/{{$product->image}}" alt=""></a>
+                        <a href="" class="detail-btn" data-toggle="modal" data-id="{{$product->id}}" data-target="#exampleModalCenter" style="cursor:pointer;" >
+                            <img src="storage/uploads/{{$product->image}}" alt="">
+
+                            @include('user.modal')
+
                         <div class="down-content">
-                          <a href="#"><h4>{{$product->name}}</h4></a>
+                          <a href="" class="detail-btn" data-toggle="modal" data-id="{{$product->id}}" data-target="#exampleModalCenter" style="cursor:pointer;" >
+                              <h4>{{$product->name}}</h4></a>
                             <h6>${{$product->old_price}}</h6>
                             <h5>${{$product->new_price}}</h5>
 

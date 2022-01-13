@@ -75,5 +75,36 @@ class HomeController extends Controller
         return view('user.products', compact('products', 'sn'));
     }
 
+    public function modal($id){
+         return Product::findOrFail($id);
+
+    }
+
+    public function searchAllProducts(Request $request){
+        if(!empty($request->search)) {
+            $search = $request->search;
+            $products = Product::where('name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'LIKE', '%' . $search. '%')
+                ->orWhere('new_price', 'LIKE','%' . $search. '%')
+                ->latest()->paginate(6)->setPath ( '' );
+            $pagination = $products->appends ( array (
+                'search' => $search
+            ) );;
+            if($products){
+                return view('user.products', compact('products'));
+            }
+
+        }if(empty($request->search)){
+
+            $products =  Product::latest()->paginate(6);;
+            return view('user.products', compact('products'));
+
+        }
+
+
+    }
+
+
+
 
 }

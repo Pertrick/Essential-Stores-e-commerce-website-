@@ -11,6 +11,16 @@
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
+    <!-- modal css-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="modal/css/ionicons.min.css">
+    <link rel="stylesheet" href="modal/css/flaticon.css">
+    <link rel="stylesheet" href="modal/css/style.css">
+
+    <!-- modal css ends -->
+
     <link rel = "icon" href ="/icon/icon.ico" type = "image/x-icon">
     <script src="/js/jquery-3.6.0.js"></script>
 
@@ -84,6 +94,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('all-products*') ? 'active' : '' }}" href="{{route('user.showAllProducts')}}">Our Products</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('about*') ? 'active' : '' }}" href="{{Route('user.about') }}">About Us</a>
                     </li>

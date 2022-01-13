@@ -54,7 +54,7 @@ class CartController extends Controller
             }
         }
 
-        session()->flash('success', 'cart updated successfully');
+        session()->flash('success', 'Item removed successfully');
     }
 
 

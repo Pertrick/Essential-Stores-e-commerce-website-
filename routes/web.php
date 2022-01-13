@@ -3,7 +3,7 @@
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,8 +26,10 @@ Route::get('/', [HomeController::class, 'redirect']);
 
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('user.about');
-Route::get('contact', [HomeController::class, 'contact'])->name('user.contact');
+Route::get('contact', [ContactController::class, 'createForm'])->name('user.contact');
+Route::post('contact', [ContactController::class, 'contactUsForm'])->name('user.contact.save');
 Route::get('search', [HomeController::class, 'search'])->name('user.search');
+Route::get('searches', [HomeController::class, 'searchAllProducts'])->name('user.searchAllProducts');
 
 Route::get('all-products', [HomeController::class, 'showAllProducts'])->name('user.showAllProducts');
 
@@ -38,6 +40,9 @@ Route::patch('update-cart', [\App\Http\Controllers\CartController::class, 'updat
     ->name('user.updateCart');
 Route::delete('remove-from--cart', [\App\Http\Controllers\CartController::class, 'removeFromCart'])
     ->name('user.removeFromCart');
+
+Route::get('product-modal/{id}', [\App\Http\Controllers\HomeController::class, 'modal'])
+    ->name('user.modal.show');
 
 
 //Review

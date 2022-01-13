@@ -55,9 +55,17 @@
                <div class="col-md-4">
 
             <div class="product-item">
-              <a href="#"><img src="storage/uploads/{{$product->image}}" alt=""></a>
+              <a href=""  class="detail-btn" data-toggle="modal" data-id="{{$product->id}}" data-target="#exampleModalCenter" style="cursor:pointer;" >
+                  <img src="storage/uploads/{{$product->image}}" alt="{{$product->name}}">
+              </a>
+
+
+                @include('user.modal')
+
+
               <div class="down-content">
-                <a href="#"><h4>{{$product->name}}</h4></a>
+                <a href="" class="detail-btn" data-toggle="modal" data-id="{{$product->id}}" data-target="#exampleModalCenter" style="cursor:pointer;" >
+                    <h4>{{$product->name}}</h4></a>
 
                   <h6>${{$product->old_price}}</h6>
                   <h5>${{$product->new_price}}</h5>
@@ -82,6 +90,7 @@
             </div>
           </div>
 
+                    @continue
             @endforeach
 
             @if(method_exists($products, 'links'))
