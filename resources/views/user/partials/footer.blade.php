@@ -25,8 +25,8 @@
                 $('#product-id').append(data.id);
                 $('#product-name').html(data.name);
                 $('#product-desc').html(data.description);
-                $('#product-old_price').html('$'+ data.old_price);
-                $('#product-new_price').html('$'+data.new_price);
+                $('#product-old_price').html('&#8358;'+ data.old_price);
+                $('#product-new_price').html('&#8358;'+data.new_price);
                 $('#product-image').html('<img src="storage/uploads/'+data.image+ '" width=250 height=250 >');
 
             }

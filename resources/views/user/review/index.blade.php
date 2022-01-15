@@ -21,7 +21,11 @@
                     <div class="post" >
 
                         <div class="user-block mt-4">
-                            <img class="img-circle img-bordered-sm" src="storage/{{ $rev->user->profile_photo_path }}" alt="user image">
+                            @if($rev->user->profile_photo_path)
+                            <img class="img-circle img-bordered-sm" src="storage/{{ $rev->user->profile_photo_path }}" alt="{{$rev->user->name}}">
+                            @else
+                                <img class="img-circle img-bordered-sm" src="storage/user.jfif" alt="user image">
+                            @endif
                             <span class="username">
 
                                  @if (Route::has('login'))

@@ -25,7 +25,7 @@ class HomeController extends Controller
                 if($role->name === "User"){
                     return view('user.index', compact('products'));
                 }else if($role->name === "Administrator"){
-                    return view('admin.index');
+                   return redirect('/admin/home');
                 }
                }
             }
@@ -33,6 +33,10 @@ class HomeController extends Controller
                 return redirect('/');
             }
 
+    }
+
+    public function adminHome(){
+        return view('admin.index');
     }
 
 

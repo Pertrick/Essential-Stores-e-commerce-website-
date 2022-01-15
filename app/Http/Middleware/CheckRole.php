@@ -20,13 +20,13 @@ class CheckRole
             return response("Permission not allowed", 401);
         }
         $actions = $request->route()->getAction();
-        $roles = isset($actions['roles']) ? $actions['roles'] : null;
+        $roles = $actions['roles'] ?? null;
 
         if($request->user()->hasAnyRoles($roles) ||  !$roles){
             return $next($request);
         }
 
         return response("Permission denied", 401);
-        
+
     }
 }

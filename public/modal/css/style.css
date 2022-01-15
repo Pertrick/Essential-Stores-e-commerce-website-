@@ -8315,7 +8315,9 @@ textarea.form-control {
         width: 50px;
         height: 2px;
         background: #fff;
-        margin: 0 auto; }
+        margin: 0 auto;
+      }
+
     .modal-content .modal-body h2 {
       position: relative;
       display: inline-block;
@@ -8323,7 +8325,8 @@ textarea.form-control {
        color:darkgrey;
         font-size: 17px;
         font-weight: bold;
-        margin: 7px auto;}
+        margin: 7px auto;
+    }
 
 .modal-content .modal-body h5 {
 
@@ -8345,7 +8348,8 @@ textarea.form-control {
         font-size: 130px;
         font-weight: 700;
         margin-left: -40px;
-        color: green; }
+        color: green;
+      }
       .modal-content .modal-body h2 sup {
         position: absolute;
         top: 50%;

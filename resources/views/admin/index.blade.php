@@ -1,3 +1,4 @@
+<base href="/">
     @include('admin.partials.header')
     <!-- Main Sidebar Container -->
 

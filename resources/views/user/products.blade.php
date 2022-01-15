@@ -27,6 +27,7 @@
                       <button class=" btn btn-outline-danger border-0 focus:outline-none"><i class="fas fa-search"></i></button>
                   </div>
               </form>
+              <div class="float-none" style="clear: both">
             <div class="filters">
               <ul>
                   <li class="active" data-filter="*">All Products</li>
@@ -54,8 +55,9 @@
                         <div class="down-content">
                           <a href="" class="detail-btn" data-toggle="modal" data-id="{{$product->id}}" data-target="#exampleModalCenter" style="cursor:pointer;" >
                               <h4>{{$product->name}}</h4></a>
-                            <h6>${{$product->old_price}}</h6>
-                            <h5>${{$product->new_price}}</h5>
+                            <h5><sub>&#8358;{{number_format($product->new_price)}}</sub></h5>
+                            <h6><sup>&#8358;{{number_format($product->old_price)}}</sup></h6>
+
 
                             <p>{{$product->description}}</p>
                           <ul class="stars">

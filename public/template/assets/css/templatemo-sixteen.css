@@ -440,8 +440,8 @@ header .navbar {
 .product-item .down-content h6 {
 	position: absolute;
 	top: 30px;
-	right: 76px;
-	font-size: 15px;
+	right: 15px;
+	font-size: 18px;
 	/*color: #121212; */
     text-decoration-line: line-through;
     color: red;
@@ -450,8 +450,9 @@ header .navbar {
 .product-item .down-content h5 {
     position: absolute;
     top: 30px;
-    right: 30px;
-    font-size: 22px;
+    right: 6px;
+    font-size: 30px;
+    font-weight: bold;
     /*color: #121212 */;
     color: green;
 }
@@ -1149,7 +1150,7 @@ footer .inner-content p a {
     .product-item .down-content h5 {
         position: absolute;
         top: 30px;
-        right: 70px;
+        right: 10px;
         margin-bottom: 20px;
     }
 	.product-item .down-content span {

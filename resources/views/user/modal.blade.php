@@ -14,9 +14,8 @@
 
                         <span class="icon-2 flaticon-snowflake"></span>
                         <div class="w-100 text text-center">
-                            <span id="product-image" class="subheading">Winter</span>
+                            <span id="product-image" class="subheading"></span>
                             <img  src="" id="product-image" class="sale" />
-
                             <h2 id="product-name"></h2>
                             <p id="product-desc" class="upper"></p>
                             <h6 id="product-new_price" class="upper"></h6>

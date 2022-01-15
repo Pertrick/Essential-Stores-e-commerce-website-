@@ -24,15 +24,15 @@
                             <div class="row">
                                 <div class="col-sm-3 hidden-xs"><img src="storage/uploads/{{ $details['image'] }}" width="100" height="100" class="img-responsive"/></div>
                                 <div class="col-sm-9">
-                                    <p class="">{{ $details['name'] }}</p>
+                                    <p class="f">{{ $details['name'] }}</p>
                                 </div>
                             </div>
                         </td>
-                        <td data-th="Price">${{ $details['price'] }}</td>
+                        <td data-th="Price">&#8358;{{number_format( $details['price']) }}</td>
                         <td data-th="Quantity">
                             <input type="number" min="1" value="{{ $details['quantity'] }}" class="form-control quantity update-cart" />
                         </td>
-                        <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td>
+                        <td data-th="Subtotal" class="text-center">&#8358;{{number_format ($details['price'] * $details['quantity'] )}}</td>
                         <td class="actions" data-th="">
                             <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
                         </td>
@@ -42,12 +42,20 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="5" class="text-right"><p><strong>Cart Total: <span style="font-weight: 700 !important; font-size: large;">${{ $total }}</span></strong></span></td>
+                <td colspan="5" class="text-right"><p><strong>Cart Total: <span style="font-weight: 700 !important; font-size: large;">&#8358;{{number_format($total)}}</span></strong></span></td>
             </tr>
             <tr>
                 <td colspan="5" class="text-right">
-                    <a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
-                    <button class="btn btn-success">Checkout</button>
+                    @if(Route::has('login'))
+                        @auth
+                            <a href="{{ url('/home') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+
+                        @else
+                            <a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+
+                        @endauth
+                    @endif
+                     <a href="{{route('user.payment.show')}}" class="btn btn-success">Checkout</a>
                 </td>
             </tr>
             </tfoot>

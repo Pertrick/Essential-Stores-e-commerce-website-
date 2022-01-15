@@ -4,6 +4,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +45,14 @@ Route::delete('remove-from--cart', [\App\Http\Controllers\CartController::class,
 Route::get('product-modal/{id}', [\App\Http\Controllers\HomeController::class, 'modal'])
     ->name('user.modal.show');
 
+//Payment controller
+Route::get('payment', [PaymentController::class, 'index'])
+    ->name('user.payment.show');
+Route::get('verify-payment/{reference_id}', [PaymentController::class, 'verify'])
+    ->name('user.payment.verify');
+Route::get('/confirm', [PaymentController::class, 'successfulPayment'])
+    ->name('user.payment.confimed');
+
 
 //Review
 Route::get('/review/{id}/review', [\App\Http\Controllers\ReviewController::class, 'index'])
@@ -53,9 +62,12 @@ Route::post('/review/{id}/review', [\App\Http\Controllers\ReviewController::clas
 Route::delete('/review/{id}/review', [\App\Http\Controllers\ReviewController::class, 'destroy'])
     ->name('user.review.delete');
 
-Route::group(['middleware' => ['auth']],function(){
+Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(function(){
+    Route::get('/home', [HomeController::class, 'adminhome'])->name('admin.home');
+
     Route::get('products', [\App\Http\Controllers\Admin\ProductController::class, 'index'])
         ->name('admin.product.index');
+
 
     Route::get('create-products', [\App\Http\Controllers\Admin\ProductController::class, 'create'])
         ->name('admin.product.create');
@@ -70,6 +82,12 @@ Route::group(['middleware' => ['auth']],function(){
         ->name('admin.product.update');
     Route::delete('delete-products/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'destroy'])
         ->name('admin.product.delete');
+
+    Route::get('users', [\App\Http\Controllers\Admin\UserController::class, 'index'])
+        ->name('admin.user.index');
+
+    Route::post('assign-users', [\App\Http\Controllers\Admin\UserController::class, 'assignRoles'])
+        ->name('admin.user.assignroles');
 
 });
 

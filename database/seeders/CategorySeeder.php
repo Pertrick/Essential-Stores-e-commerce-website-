@@ -30,15 +30,15 @@ class CategorySeeder extends Seeder
         $category3->save();
 
         $category4 = new Category();
-        $category4->name = "phones";
+        $category4->name = "wristwatches";
         $category4->save();
 
         $category5 = new Category();
-        $category5->name = "laptops";
+        $category5->name = "glasses";
         $category5->save();
 
         $category6 = new Category();
-        $category6->name = "electronics";
+        $category6->name = "necklaces";
         $category6->save();
 
         $category7 = new Category();
