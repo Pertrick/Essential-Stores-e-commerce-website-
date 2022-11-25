@@ -9,92 +9,83 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="admin/dist/css/adminlte.min.css">
 
-<div class="container"  style="padding-top: 100px;">
-    <div class="content-wrapper">
+<div class="container" style="padding-top:100px;">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 border" style="border-radius: 5px; padding:5px;">
+            <a href="" class="detail-btn" data-toggle="modal" data-id="{{$product->id}}" data-target="#exampleModalCenter" style="cursor:pointer;">
+                <img src="storage/uploads/{{$product->image}}" alt="{{$product->name}}" width="100%" >
+            </a>
+            <span>{{$product->name}}</span>
+            <div class="float-right">
+                <small class="text-danger" style="text-decoration: line-through;">&#8358;{{number_format($product->new_price)}}</small>
+                <span class="text-success" >&#8358;{{number_format($product->old_price)}}</span>
+            </div>
+            
+                <p>{{$product->description}}</p>
+        </div>
+        <div class="col-lg-7 col-md-6 ml-2" style="background-color:#eee; border-radius:5px;">
+            @if(count($reviews)>0)
+            @foreach($reviews as $rev)
+            <div class="post">
 
-        <section class="content-header">
-            <div class="container-fluid">
+                <div class="user-block mt-4">
+                    @if($rev->user->profile_photo_path)
+                    <img class="img-circle img-bordered-sm" src="storage/{{ $rev->user->profile_photo_path }}" alt="{{$rev->user->name}}">
+                    @else
+                    <img class="img-circle img-bordered-sm" src="storage/user.jfif" alt="user image">
+                    @endif
+                    <span class="username">
 
+                        @if (Route::has('login'))
 
-                @if(count($reviews)>0)
-                    @foreach($reviews as $rev)
-                    <div class="post" >
+                        @auth
+                        @foreach($roles as $role)
+                        @if($role->name === "Administrator")
 
-                        <div class="user-block mt-4">
-                            @if($rev->user->profile_photo_path)
-                            <img class="img-circle img-bordered-sm" src="storage/{{ $rev->user->profile_photo_path }}" alt="{{$rev->user->name}}">
-                            @else
-                                <img class="img-circle img-bordered-sm" src="storage/user.jfif" alt="user image">
-                            @endif
-                            <span class="username">
-
-                                 @if (Route::has('login'))
-
-                                    @auth
-                                        @foreach($roles as $role)
-                                            @if($role->name === "Administrator")
-
-                                                <form style="float: right" action="{{ route('user.review.delete', $rev->id) }}" method="POST"
-                                                      onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
-                                <input type="submit" name="_method" value="Delete" class="btn btn-danger">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            </form>
-                                            @endif
-                                        @endforeach
-                                    @endauth
-                                    @endif
-
-
-
-
-
-
-                                <a href="#">{{$rev->user->name}}</a>
-
-
-                            </span>
-
-
-
-                            <span class="description">Shared publicly - {{$rev->created_at->format('l, jS \of F Y h:i:s A')}}</span>
-                        </div>
-                        <!-- /.user-block -->
-
-                        <p>
-                           <b>{{$rev->text}}</b>
-                        </p>
-
-                        <hr>
+                        <form class="float-right" action="{{ route('user.review.delete', $rev->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
+                            <input type="submit" name="_method" value="Delete" class="btn btn-danger">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        </form>
+                        @endif
                         @endforeach
-                        @else
-                            <p><b>No Review Yet ! Be the first to make a review.</b></p>
-
+                        @endauth
                         @endif
 
-                        <form action="{{route('user.review.store', $products->id)}}" method="post">
-                            @csrf
-                            <textarea class="form-control form-control-sm" type="text" name="text" placeholder="Type a Review.." cols="5" rows="5" autofocus autocomplete="text" autocapitalize="text" required></textarea>
+                        <a href="#">{{$rev->user->name}}</a>
+                    </span>
+                    <span class="description">Shared publicly - {{$rev->created_at}}</span>
+                </div>
+                <!-- /.user-block -->
 
-                            <input type="submit" value="submit" class="btn btn-success mt-2">
-                            <!-- /.post -->
-                        </form>
+                <p>
+                    <b>{{$rev->text}}</b>
+                </p>
 
-                        <div class="d-flex justify-content-center">
-                            {!! $reviews->links() !!}
-                        </div>
+                <hr>
+                @endforeach
+                @else
+                <p><b>No Review Yet ! Be the first to make a review.</b></p>
 
+                @endif
 
+                <form action="{{route('user.review.store', $product->id)}}" method="post">
+                    @csrf
+                    <textarea class="form-control form-control-sm" type="text" name="text" placeholder="Type a Review.." cols="5" rows="5" autofocus autocomplete="text" autocapitalize="text" required></textarea>
 
+                    <input type="submit" value="submit" class="btn btn-success mt-2">
+                    <!-- /.post -->
+                </form>
 
-                    </div>
+                <div class="d-flex justify-content-center">
+                    {!! $reviews->links() !!}
+                </div>
 
             </div>
 
-        </section>
-
-        <!-- Content Header (Page header) -->
-
+        </div>
     </div>
+    <!-- Content Header (Page header) -->
+
 </div>
 
 

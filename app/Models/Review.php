@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Product;
+use Carbon\Carbon;
 
 class Review extends Model
 {
@@ -21,5 +22,9 @@ class Review extends Model
     }
     public function product(){
         return $this->belongsTo(Product::class);
+    }
+
+    public function getCreatedAtAttribute($value){
+        return Carbon::parse($value)->diffForHumans();
     }
 }

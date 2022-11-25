@@ -21,26 +21,15 @@ class ReviewController extends Controller
     }
 
     public function index($id)
-    {
-        if (Auth::check()) {
+    { 
+        $product = Product::with('review','user')->findOrFail($id);
+        $reviews = $product->review()->with('user')->latest()->paginate(7);
 
-        $roles = auth()->user()->roles;
-        $products = Product::with('review','user')->findOrFail($id);
-        $reviews = $products->review()->with('user')->latest()->paginate(7);
-
-        return view('user.review.index', compact('reviews', 'products', 'roles'));
-
-    }else{
-
-            $products = Product::with('review','user')->findOrFail($id);
-            $reviews = $products->review()->with('user')->latest()->paginate(7);
-
-            //dd($reviews);
-
-            return view('user.review.index', compact('reviews', 'products'));
-
+        if (!Auth::check()) {
+            return view('user.review.index', compact('reviews', 'product'));
         }
-
+        $roles = auth()->user()->roles;
+        return view('user.review.index', compact('reviews', 'product', 'roles'));
     }
 
     /**
