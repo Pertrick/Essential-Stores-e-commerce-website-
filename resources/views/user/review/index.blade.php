@@ -3,22 +3,22 @@
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome Icons -->
-<link rel="stylesheet" href="admin/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="adminpanel/plugins/fontawesome-free/css/all.min.css">
 <!-- overlayScrollbars -->
-<link rel="stylesheet" href="admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<link rel="stylesheet" href="adminpanel/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="admin/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="adminpanel/dist/css/adminlte.min.css">
 
 <div class="container" style="padding-top:100px;">
     <div class="row">
         <div class="col-lg-4 col-md-6 border" style="border-radius: 5px; padding:5px;">
             <a href="" class="detail-btn" data-toggle="modal" data-id="{{$product->id}}" data-target="#exampleModalCenter" style="cursor:pointer;">
-                <img src="storage/uploads/{{$product->image}}" alt="{{$product->name}}" width="100%" >
+                <img src="storage/{{$product->image}}" alt="{{$product->name}}" width="100%" >
             </a>
             <span>{{$product->name}}</span>
             <div class="float-right">
-                <small class="text-danger" style="text-decoration: line-through;">&#8358;{{number_format($product->new_price)}}</small>
-                <span class="text-success" >&#8358;{{number_format($product->old_price)}}</span>
+                <small class="text-danger" style="text-decoration: line-through;">&#8358;{{number_format($product->new_price,2)}}</small>
+                <span class="text-success" >&#8358;{{number_format($product->old_price,2)}}</span>
             </div>
             
                 <p>{{$product->description}}</p>
@@ -37,17 +37,14 @@
                     <span class="username">
 
                         @if (Route::has('login'))
-
                         @auth
-                        @foreach($roles as $role)
-                        @if($role->name === "Administrator")
+                        @if(auth()->user()->role_id == 1)
 
                         <form class="float-right" action="{{ route('user.review.delete', $rev->id) }}" method="POST" onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                             <input type="submit" name="_method" value="Delete" class="btn btn-danger">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         </form>
                         @endif
-                        @endforeach
                         @endauth
                         @endif
 
@@ -72,7 +69,7 @@
                     @csrf
                     <textarea class="form-control form-control-sm" type="text" name="text" placeholder="Type a Review.." cols="5" rows="5" autofocus autocomplete="text" autocapitalize="text" required></textarea>
 
-                    <input type="submit" value="submit" class="btn btn-success mt-2">
+                    <input type="submit" value="submit" class="btn btn-success mt-2 float-right">
                     <!-- /.post -->
                 </form>
 
@@ -92,23 +89,23 @@
 
 
 <!-- Bootstrap -->
-<script src="admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="adminpanel/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
-<script src="admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="adminpanel/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="admin/dist/js/adminlte.js"></script>
+<script src="adminpanel/dist/js/adminlte.js"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
-<script src="admin/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-<script src="admin/plugins/raphael/raphael.min.js"></script>
-<script src="admin/plugins/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="admin/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<script src="adminpanel/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+<script src="adminpanel/plugins/raphael/raphael.min.js"></script>
+<script src="adminpanel/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="adminpanel/plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
-<script src="admin/plugins/chart.js/Chart.min.js"></script>
+<script src="adminpanel/plugins/chart.js/Chart.min.js"></script>
 
 <!-- AdminLTE for demo purposes -->
-<script src="admin/dist/js/demo.js"></script>
+<script src="adminpanel/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="admin/dist/js/pages/dashboard2.js"></script>
+<script src="adminpanel/dist/js/pages/dashboard2.js"></script>
 @include('user.partials.footer')

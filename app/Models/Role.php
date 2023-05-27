@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use app\Models\User;
 
-class Role extends Model
+class Role extends \TCG\Voyager\Models\Role
 {
     use HasFactory;
 

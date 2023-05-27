@@ -89,7 +89,7 @@ a.filled-button:hover {
 }
 
 .products-heading {
-	background-image: url(../images/products-heading.jpg);
+	/* background-image: url(../images/products-heading.jpg); */
 }
 
 .about-heading {
@@ -101,7 +101,7 @@ a.filled-button:hover {
 }
 
 .page-heading {
-	padding: 210px 0px 130px 0px;
+	/* padding: 210px 0px 130px 0px; */
 	text-align: center;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -316,6 +316,8 @@ header .navbar {
 	padding-top: 80px;
 }
 
+
+
 .banner-item-01 {
 	padding: 300px 0px;
     background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url(../images/slide-05.jpg);
@@ -339,6 +341,35 @@ header .navbar {
 	background-repeat: no-repeat;
 	background-position: center center;
 }
+
+
+/* Product */
+.product-item-01 {
+	padding: 300px 0px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url(/storage/uploads/product-1.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.product-item-02 {
+	padding: 300px 0px;
+	background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url(/storage/uploads/product-2.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.product-item-03 {
+	padding: 300px 0px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url(/storage/uploads/product-3.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+
+
 
 .banner .banner-item {
 	max-height: 600px;
@@ -404,7 +435,7 @@ header .navbar {
 /* Latest Produtcs */
 
 .latest-products {
-	margin-top: 100px;
+	margin-top: 60px;
 }
 
 .latest-products .section-heading a {
@@ -623,7 +654,7 @@ footer .inner-content p a {
 /* Product Page */
 
 .products {
-	margin-top: 100px;
+	margin-top: 10px;
 }
 
 .products .filters {

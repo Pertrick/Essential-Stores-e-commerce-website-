@@ -13,10 +13,13 @@ class SearchController extends Controller
 
     public function search(Request $request){
         if($request->ajax()){
+            dd($request);
             if(!empty($request->search)) {
+                dd("search-=roduct");
                 $search = $request->search;
                 $output = "";
                 $searchProduct = Product::where('name', 'like', '%' . $search . '%')->get();
+                dd("searchProduct");
                 if($searchProduct){
                     foreach ($searchProduct as $key=> $product)
                     {

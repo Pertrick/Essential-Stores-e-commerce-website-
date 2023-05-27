@@ -9,14 +9,14 @@ use Mail;
 
 class ContactController extends Controller
 {
-    public function createForm() {
+    public function index() {
         return view('user.contact');
     }
 
     // Store Contact Form data
     public function ContactUsForm(ConatactRequest $request) {
 
-        // Form validation handlede by ContactRequest
+        // Form validation handled by ContactRequest
         $request->validated();
         //  Store data in database
         Contact::create($request->all());

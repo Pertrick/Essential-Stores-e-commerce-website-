@@ -1,35 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
-use App\Models\Review;
-use App\Models\Role;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 
-class ReviewController extends Controller
+class CategoryController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth')->only('store');
-    }
-
-    public function index(Product $product)
+  
+    public function index()
     { 
-        // $product = Product::with('review','user')->findOrFail($id);
-        $reviews = $product->review()->with('user')->latest()->paginate(7);
-
-        if (!Auth::check()) {
-            return view('user.review.index', compact('reviews', 'product'));
-        }
-        $roles = auth()->user()->roles;
-        return view('user.review.index', compact('reviews', 'product', 'roles'));
+        $categories = Category::get()->paginate(12);
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -39,7 +28,7 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -51,16 +40,6 @@ class ReviewController extends Controller
     public function store(Request $request, $id)
     {
 
-        $this->validate($request, [
-           'text' => 'required',
-        ]);
-
-        auth()->user()->reviews()->create([
-            'text' => $request->text,
-            'product_id' => $id,
-        ]);
-
-        return redirect()->back()->with("message", "Review Added!");
 
     }
 
@@ -106,11 +85,6 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        //dd($id);
-        $review = Review::findOrFail($id);
-
-        $review->delete();
-
-        return redirect()->back()->with("message", "Review Deleted Successfully");
+      
     }
 }

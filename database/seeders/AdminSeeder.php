@@ -23,7 +23,6 @@ class AdminSeeder extends Seeder
         $admin->password = bcrypt('12345678');
         $admin->phone  = '08131219734';
         $admin->address = '45, Kings Road';
-
         $admin->save();
 
         $admin->roles()->attach($role_user);

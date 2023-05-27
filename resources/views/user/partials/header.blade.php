@@ -9,7 +9,8 @@
     <meta name="author" content="">
     <link rel="stylesheet" href="admin/plugins/fontawesome-free/css/all.min.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
 
     <!-- modal css-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
@@ -21,7 +22,7 @@
 
     <!-- modal css ends -->
 
-    <link rel = "icon" href ="/icon/icon.ico" type = "image/x-icon">
+    <link rel="icon" href="/icon/icon.ico" type="image/x-icon">
     <script src="/js/jquery-3.6.0.js"></script>
 
     <title>Essential Stores</title>
@@ -45,71 +46,73 @@
 
 <body>
 
-<!-- ***** Preloader Start ***** -->
-<div id="preloader">
-    <div class="jumper">
-        <div></div>
-        <div></div>
-        <div></div>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-</div>
-<!-- ***** Preloader End ***** -->
+    <!-- ***** Preloader End ***** -->
 
-<!-- Header -->
-<header class="">
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
+    <!-- Header -->
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
 
-            @if(Route::has('login'))
-                @auth
-                    <a class="navbar-brand" href="{{route('home')}}"><h2>Essential <em>Stores</em></h2></a>
-                @else
-                    <a class="navbar-brand" href="/"><h2>Essential <em>Stores</em></h2></a>
-                @endauth
-            @endif
+                @if (Route::has('login'))
+                    @auth
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                            <h2>Essential <em>Stores</em></h2>
+                        </a>
+                    @else
+                        <a class="navbar-brand" href="/">
+                            <h2>Essential <em>Stores</em></h2>
+                        </a>
+                    @endauth
+                @endif
 
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    @if(Route::has('login'))
-                        @auth
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('home*') ? 'active' : '' }}" href="{{route('home')}}">Home
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
 
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('/*') ? 'active' : '' }}" href="/">Home
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                        @endauth
-                    @endif
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('all-products*') ? 'active' : '' }}" href="{{route('user.showAllProducts')}}">Our Products</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('about*') ? 'active' : '' }}" href="{{Route('user.about') }}">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('contact*') ? 'active' : '' }}" href="{{Route('user.contact') }}">Contact Us</a>
-                    </li>
-
-                    <li class="nav-item">
-
-                        <div class="dropdown">
-                            <a href="{{route('user.cart')}}" class="nav-link" >
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('/*') ? 'active' : '' }}" href="/">Home
+                                <span class="sr-only">(current)</span>
                             </a>
+                        </li>
 
-                            <!-- I coommented this out because it is messing up my UI-->
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('all-products*') ? 'active' : '' }}"
+                                href="{{ route('user.showAllProducts') }}">Our Products</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('about*') ? 'active' : '' }}"
+                                href="{{ Route('user.about') }}">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('contact*') ? 'active' : '' }}"
+                                href="{{ Route('user.contact') }}">Contact Us</a>
+                        </li>
+
+                        <li class="nav-item">
+
+                            <div class="dropdown">
+                                <a href="{{ route('user.cart') }}" class="nav-link {{ Request::is('cart*') ? 'active' : '' }}">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span id="cart-count"
+                                        class="badge badge-pill badge-danger">
+                                        {{ auth()->user()?->carts()->count() ?? count((array) session('cart')) }}
+                                    </span>
+                                </a>
+
+                                {{-- <!-- I coommented this out because it is messing up my UI-->
                             <!--
                             <div class="dropdown-menu">
                                 <div class="row total-header-section">
@@ -117,15 +120,15 @@
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
                                     </div>
                                     @php $total = 0 @endphp
-                                    @foreach((array) session('cart') as $id => $details)
+                                    @foreach ((array) session('cart') as $id => $details)
                                         @php $total += $details['price'] * $details['quantity'] @endphp
                                     @endforeach
                                     <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
                                         <p>Total: <span class="text-info">$ {{ $total }}</span></p>
                                     </div>
                                 </div>
-                                @if(session('cart'))
-                                    @foreach(session('cart') as $id => $details)
+                                @if (session('cart'))
+                                    @foreach (session('cart') as $id => $details)
                                         <div class="row cart-detail">
                                             <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
                                                 <img src="{{ $details['image'] }}" />
@@ -144,50 +147,47 @@
                                     </div>
                                 </div>
                             </div>
-                            -->
-                        </div>
+                            --> --}}
+                            </div>
 
 
-                    </li>
+                        </li>
 
-                    @if (Route::has('login'))
+                        @if (Route::has('login'))
 
-                        @auth
-                            <li class="nav-item">
-                                <x-app-layout></x-app-layout>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a href="{{ route('login') }}" class="nav-link">Log in</a>
-                            </li>
-
-
-                            @if (Route::has('register'))
+                            @auth
                                 <li class="nav-item">
-                                    <a href="{{ route('register') }}" class="nav-link">Register</a>
+                                    <x-app-layout></x-app-layout>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a href="{{ route('login') }}" class="nav-link">Log in</a>
                                 </li>
 
-                            @endif
-                        @endauth
 
-                    @endif
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a href="{{ route('register') }}" class="nav-link">Register</a>
+                                    </li>
+                                @endif
+                            @endauth
 
-                </ul>
+                        @endif
+
+                    </ul>
+                </div>
             </div>
+        </nav>
+
+        <div class="container">
+
+            @if (session('success'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <div class="text-center">{{ session('success') }}</div>
+                </div>
+            @endif
+
+            @yield('content')
         </div>
-    </nav>
-
-    <div class="container">
-
-        @if(session('success'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert">x</button>
-                <div class="text-center">{{ session('success') }}</div>
-            </div>
-        @endif
-
-        @yield('content')
-    </div>
-</header>
-
-
+    </header>

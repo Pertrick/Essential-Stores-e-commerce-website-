@@ -10,13 +10,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Role;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Payment;
 
 
-class User extends Authenticatable
+class User extends \TCG\Voyager\Models\User
 {
     use HasApiTokens;
     use HasFactory;
@@ -67,41 +66,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-    public function hasAnyRoles($roles)
-    {
-        if(is_array($roles)){
-            foreach ($roles as $role) {
-                # code...
-                if($this->hasRole($role)){
-                    return true;
-                }
-            }
-        }else{
-            if($this->hasRole(($roles))){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public function hasRole($role)
-    {
-        if($this->roles()->where('name', $role)->first()){
-            return true;
-        }
-        return false;
-    }
-
     public function products()
     {
         return $this->hasMany(Product::class);
     }
+
     public function reviews()
     {
         return $this->hasMany(Review::class);
@@ -115,5 +84,11 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->belongsToMany(Payment::class);
+    }
+
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 }

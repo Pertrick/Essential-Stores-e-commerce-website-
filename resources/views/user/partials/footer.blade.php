@@ -1,37 +1,35 @@
-
 <script type="text/javascript">
+    $(document).ready(function() {
 
+        $('.detail-btn').click(function() {
+            const id = $(this).attr('data-id');
+            console.log(id);
+            $.ajax({
+                url: 'product-modal/' + id,
+                type: 'GET',
+                data: {
+                    "id": id,
+                },
+                success: function(data) {
+                    console.log(data);
+                    $('.detail').click(function() {
+                        $.ajax({
+                            type: 'GET',
+                            url: 'add-to-cart/' + data.id,
 
-    $(document).ready(function (){
-
-    $('.detail-btn').click(function (){
-        const id = $(this).attr('data-id');
-        console.log(id);
-        $.ajax({
-            url: 'product-modal/'+id,
-            type: 'GET',
-            data: {
-                "id" : id,
-            },
-            success:function (data){
-                console.log(data);
-                $('.detail').click(function (){
-                    $.ajax({
-                        type: 'GET',
-                        url : 'add-to-cart/'+data.id,
-
+                        });
                     });
-                });
-                $('#product-id').append(data.id);
-                $('#product-name').html(data.name);
-                $('#product-desc').html(data.description);
-                $('#product-old_price').html('&#8358;'+ data.old_price);
-                $('#product-new_price').html('&#8358;'+data.new_price);
-                $('#product-image').html('<img src="storage/uploads/'+data.image+ '" width=250 height=250 >');
+                    $('#product-id').append(data.id);
+                    $('#product-name').html(data.name);
+                    $('#product-desc').html(data.description);
+                    $('#product-old_price').html('&#8358;' + (Math.round(data.old_price * 100) / 100).toFixed(2));
+                    $('#product-new_price').html('&#8358;' + (Math.round(data.new_price * 100) / 100).toFixed(2));
+                    $('#product-image').html('<img src="storage/' + data.image + '" width=250 height=250 >');
 
-            }
+                }
+            });
         });
-    });
+
 
     });
 </script>
@@ -63,13 +61,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
-<script language = "text/Javascript">
+<script language="text/Javascript">
     cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-    function clearField(t){                   //declaring the array outside of the
-        if(! cleared[t.id]){                      // function makes it static and global
-            cleared[t.id] = 1;  // you could use true and false, but that's more typing
-            t.value='';         // with more chance of typos
-            t.style.color='#fff';
+    function clearField(t) { //declaring the array outside of the
+        if (!cleared[t.id]) { // function makes it static and global
+            cleared[t.id] = 1; // you could use true and false, but that's more typing
+            t.value = ''; // with more chance of typos
+            t.style.color = '#fff';
         }
     }
 </script>
